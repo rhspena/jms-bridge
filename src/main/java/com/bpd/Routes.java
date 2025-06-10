@@ -44,12 +44,12 @@ public class Routes extends RouteBuilder {
                 .log("Consumiendo un mensaje de Active MQ para enviarlo a IBM MQ: ${body}")
                 .to("mq:queue:{{ibm.mq.queue.from-amq}}");
 
-        /// CONSUMERS
-        from("amq:queue:{{amq.queue}}")                
+        // CONSUMERS
+        from("amq:queue:{{amq.queue.from-mq}}")                
                 .id("amqc")
                 .log("Mensaje recibido de Active MQ: ${body}");
 
-        from("mq:queue:{{ibm.mq.queue}}") 
+        from("mq:queue:{{ibm.mq.queue.from-amq}}") 
                 .id("mqc")
                 .log("Mensaje recibido de IBM MQ: ${body}");
     }
